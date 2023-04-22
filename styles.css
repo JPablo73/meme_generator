@@ -9,10 +9,10 @@ body {
   background-color: #f0f0f0;
 }
 
-.container,
-.img-container {
+.form-container,
+.meme-container {
   width: 75%;
-  margin: 0 auto;
+  margin: 20px auto;
 }
 
 form {
@@ -53,19 +53,6 @@ input[type="text"] {
   font-size: 1rem;
 }
 
-.img-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin: 20px auto;
-}
-
-.img-card {
-  width: 300px;
-  height: 400px;
-  margin-bottom: 10px;
-}
-
 button {
   margin-right: 0;
   background-color: #798ecd;
@@ -76,4 +63,54 @@ button {
   border-radius: 5px;
   border: 1px solid #3c486b;
   cursor: pointer;
+}
+
+/* meme container output */
+
+.meme-container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.img-card {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 300px;
+  height: 400px;
+  margin: 5px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.caption {
+  color: white;
+  font-weight: 400;
+  font-size: 2.5rem;
+  font-family: "Delicious Handrawn";
+  letter-spacing: 1.4px;
+}
+
+.caption-top {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+}
+.caption-bottom {
+  position: absolute;
+  bottom: 5px;
+  right: 20px;
+}
+
+@media (max-width: 680px) {
+  .img-card {
+    display: block;
+    flex-direction: column;
+  }
 }

@@ -1,22 +1,50 @@
+//form variables
 const imgUrl = document.querySelector("#imgUrl");
 const topText = document.querySelector("#topText");
 const bottomText = document.querySelector("#bottomText");
 const inputBtn = document.querySelector("button");
 
-const imgContainer = document.querySelector(".img-container");
+// meme container variable
+const memeContainer = document.querySelector(".meme-container");
 
+// adds meme to container bellow form
 inputBtn.addEventListener("click", function () {
-  const url = imgUrl.value;
-  const topInput = topText.value;
-  const bottomInput = bottomText.value;
-  console.log(topInput, bottomInput);
+  // image container
+  const imgCard = document.createElement("div");
+  imgCard.classList.add("img-card");
+  memeContainer.appendChild(imgCard);
 
+  // loads image from url
+  const url = imgUrl.value;
   const img = document.createElement("img");
   img.src = url;
   img.classList.add("img-card");
-  imgContainer.appendChild(img);
+  imgCard.appendChild(img);
+
+  // creates the image text
+  const topInput = document.createElement("p");
+  const bottomInput = document.createElement("p");
+
+  topInput.innerHTML = topText.value;
+  bottomInput.innerHTML = bottomText.value;
+
+  topInput.classList.add("caption-top", "caption");
+  bottomInput.classList.add("caption-bottom", "caption");
+
+  imgCard.appendChild(topInput);
+  imgCard.appendChild(bottomInput);
 
   this.form.reset();
+});
+
+// removes selected image by double clicking
+memeContainer.addEventListener("dblclick", function (e) {
+  if (e.target.tagName === "DIV") {
+    e.target.remove();
+  }
+  if (e.target.tagName === "p" || e.target.tagName === "IMG") {
+    e.target.parentElement.remove();
+  }
 });
 
 // images

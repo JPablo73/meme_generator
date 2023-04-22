@@ -21,14 +21,19 @@
     />
   </head>
   <body>
-    <div class="container">
-      <h1><span class="title">Acme</span> meme generator</h1>
+    <h1><span class="title">Acme</span> meme generator</h1>
+    <div class="form-container">
       <form>
         <label for="imgUrl">Image URL:</label>
-        <input id="imgUrl" type="text" placeholder="Enter image URL..." />
+        <input
+          id="imgUrl"
+          type="url"
+          placeholder="Enter image URL..."
+          required
+        />
 
         <label for="topText">Top Text:</label>
-        <input id="topText" type="text" placeholder="Enter text..." />
+        <input id="topText" type="text" placeholder="Enter text..." required />
 
         <label for="bottomText">Bottom Text:</label>
         <input id="bottomText" type="text" placeholder="Enter text..." />
@@ -36,7 +41,10 @@
         <button type="button">Create meme</button>
       </form>
     </div>
-    <div class="img-container"></div>
+
+    <div class="meme-container">
+      <!-- <div class="img-card"></div> -->
+    </div>
   </body>
   <script src="app.js"></script>
 </html>
