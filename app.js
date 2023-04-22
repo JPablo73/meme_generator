@@ -7,6 +7,14 @@ const inputBtn = document.querySelector("button");
 // meme container variable
 const memeContainer = document.querySelector(".meme-container");
 
+function validateForm() {
+  let x = document.forms["meme-form"]["img-url"].value;
+  if (x == "") {
+    alert("Name must be filled out");
+    return false;
+  }
+}
+
 // adds meme to container bellow form
 inputBtn.addEventListener("click", function () {
   // image container
@@ -47,7 +55,7 @@ memeContainer.addEventListener("dblclick", function (e) {
   }
 });
 
-// images
+// sample images
 
 // https://images.unsplash.com/photo-1610898564097-e28bd69740a4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1lbWV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60
 
