@@ -44,9 +44,7 @@ inputBtn.addEventListener("click", function () {
 
   let isFormValidated = validateForm(url);
   if (isFormValidated) {
-    imgCard.appendChild(img);
-    imgCard.appendChild(topInput);
-    imgCard.appendChild(bottomInput);
+    imgCard.append(img, topInput, bottomInput);
   } else {
     imgCard.classList.remove("img-card");
   }
