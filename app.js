@@ -7,15 +7,19 @@ const inputBtn = document.querySelector("button");
 // meme container variable
 const memeContainer = document.querySelector(".meme-container");
 
-function validateForm() {
-  let x = document.forms["meme-form"]["img-url"].value;
-  if (x == "") {
-    alert("Name must be filled out");
+function validateForm(url) {
+  // regular expression to check for valid url format
+  const urlRegex = /^(?:\w+:)?\/\/([^\s\.]+\.\S{2}|localhost[\:?\d]*)\S*$/;
+  if (urlRegex.test(url)) {
+    return true;
+  } else {
+    alert("please enter valid url");
     return false;
   }
 }
 
 // adds meme to container bellow form
+
 inputBtn.addEventListener("click", function () {
   // image container
   const imgCard = document.createElement("div");
@@ -27,7 +31,6 @@ inputBtn.addEventListener("click", function () {
   const img = document.createElement("img");
   img.src = url;
   img.classList.add("img-card");
-  imgCard.appendChild(img);
 
   // creates the image text
   const topInput = document.createElement("p");
@@ -39,17 +42,20 @@ inputBtn.addEventListener("click", function () {
   topInput.classList.add("caption-top", "caption");
   bottomInput.classList.add("caption-bottom", "caption");
 
-  imgCard.appendChild(topInput);
-  imgCard.appendChild(bottomInput);
+  let isFormValidated = validateForm(url);
+  if (isFormValidated) {
+    imgCard.appendChild(img);
+    imgCard.appendChild(topInput);
+    imgCard.appendChild(bottomInput);
+  } else {
+    imgCard.classList.remove("img-card");
+  }
 
   this.form.reset();
 });
 
 // removes selected image by double clicking
 memeContainer.addEventListener("dblclick", function (e) {
-  if (e.target.tagName === "DIV") {
-    e.target.remove();
-  }
   if (e.target.tagName === "p" || e.target.tagName === "IMG") {
     e.target.parentElement.remove();
   }
