@@ -1,65 +1,58 @@
-//form variables
-const imgUrl = document.querySelector("#imgUrl");
-const topText = document.querySelector("#topText");
-const bottomText = document.querySelector("#bottomText");
+// Form variables
+const imgUrlInput = document.querySelector("#imgUrl");
+const topTextInput = document.querySelector("#topText");
+const bottomTextInput = document.querySelector("#bottomText");
 const inputBtn = document.querySelector("button");
 
-// meme container variable
+// Meme container variable
 const memeContainer = document.querySelector(".meme-container");
 
-function validateForm(url) {
-  // regular expression to check for valid url format
+function validateUrl(url) {
   const urlRegex = /^(?:\w+:)?\/\/([^\s\.]+\.\S{2}|localhost[\:?\d]*)\S*$/;
-  if (urlRegex.test(url)) {
-    return true;
-  } else {
-    alert("please enter valid url");
-    return false;
-  }
+  return urlRegex.test(url);
 }
 
-// adds meme to container bellow form
-
-inputBtn.addEventListener("click", function () {
-  // image container
+function createMemeCard(url, topText, bottomText) {
   const imgCard = document.createElement("div");
   imgCard.classList.add("img-card");
-  memeContainer.appendChild(imgCard);
 
-  // loads image from url
-  const url = imgUrl.value;
   const img = document.createElement("img");
   img.src = url;
   img.classList.add("img-card");
 
-  // creates the image text
-  const topInput = document.createElement("p");
-  const bottomInput = document.createElement("p");
+  const topCaption = document.createElement("p");
+  topCaption.textContent = topText;
+  topCaption.classList.add("caption-top", "caption");
 
-  topInput.innerHTML = topText.value;
-  bottomInput.innerHTML = bottomText.value;
+  const bottomCaption = document.createElement("p");
+  bottomCaption.textContent = bottomText;
+  bottomCaption.classList.add("caption-bottom", "caption");
 
-  topInput.classList.add("caption-top", "caption");
-  bottomInput.classList.add("caption-bottom", "caption");
+  imgCard.append(img, topCaption, bottomCaption);
+  memeContainer.appendChild(imgCard);
+}
 
-  let isFormValidated = validateForm(url);
-  if (isFormValidated) {
-    imgCard.append(img, topInput, bottomInput);
+inputBtn.addEventListener("click", function () {
+  const url = imgUrlInput.value;
+  const topText = topTextInput.value;
+  const bottomText = bottomTextInput.value;
+
+  if (validateUrl(url)) {
+    createMemeCard(url, topText, bottomText);
   } else {
-    imgCard.classList.remove("img-card");
+    alert("Please enter a valid URL.");
   }
 
   this.form.reset();
 });
 
-// removes selected image by double clicking
 memeContainer.addEventListener("dblclick", function (e) {
-  if (e.target.tagName === "p" || e.target.tagName === "IMG") {
+  if (e.target.matches("p, img")) {
     e.target.parentElement.remove();
   }
 });
 
-// sample images
+// sample images from unsplash.com
 
 // https://images.unsplash.com/photo-1610898564097-e28bd69740a4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1lbWV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60
 
